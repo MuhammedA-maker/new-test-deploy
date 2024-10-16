@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: note-app-service
+  namespace: note-app
+spec:
+  selector:
+    app: note-app
+  ports:
+  - port: 80
+    targetPort: 5000

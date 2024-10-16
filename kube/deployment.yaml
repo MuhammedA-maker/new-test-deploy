@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: note-app-deployment
+  namespace: note-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: note-app
+  template:
+    metadata:
+      labels:
+        app: note-app
+    spec:
+      containers:
+      - name: note-app-container
+        image: bassma/flasknoteapp
+        ports:
+        - containerPort: 5000 
