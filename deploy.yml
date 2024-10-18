@@ -3,7 +3,7 @@
     - name: Pull latest Docker image
       docker_container:
         name: your-app
-        image: muhammedabdullah/docker-pull-push:211
+        image: muhammedabdullah/docker-pull-push:latest
         state: started
         ports:
           - "8087:5000"
