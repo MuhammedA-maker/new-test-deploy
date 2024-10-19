@@ -1,14 +1,9 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-
-  required_version = ">= 1.2.0"
+variable "region" {
+  type    = string
+  default = "us-east-1"
 }
-provider "aws" {
-  profile = "default"
-  region     = var.region
+
+variable "ami" {
+  type    = string
+  default = "ami-0866a3c8686eaeeba"
 }
