@@ -1,21 +1,6 @@
 ---
-- name: Launch EC2 instance and deploy Docker container
-  hosts: web
-  gather_facts: false
-  vars:
-    keypair: my-key
-    instance_type: t2.micro
-    instance_name: my-docker-instance
-    image: ami-0866a3c8686eaeeba
-    wait: yes
-    group: test-note-app
-    region: us-east-1
-    security_group: launch-wizard-1
-
-  
-  tasks:
 - name: Deploy Docker container
-  hosts: aws_instances
+  hosts: web
   become: true
   tasks:
     - name: Update and upgrade apt packages
