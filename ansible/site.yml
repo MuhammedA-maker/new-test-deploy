@@ -12,7 +12,7 @@
       apt:
         name: "{{ item }}"
         state: present
-      with_items:
+      loop:
         - apt-transport-https
         - ca-certificates
         - curl
@@ -20,10 +20,12 @@
 
     - name: Install Docker using convenience script
       shell: curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+      args:
+        executable: /bin/bash
 
     - name: Add Docker repository
       apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
         state: present
         filename: docker
 
