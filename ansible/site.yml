@@ -20,9 +20,7 @@
 
     - name: Install Docker using convenience script
       shell: curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
-      args:
-        warn: false
-
+      
     - name: Add Docker GPG key to apt
       apt_key:
         file: /tmp/docker.gpg
