@@ -1,6 +1,7 @@
 resource "aws_instance" "Note-App" {
-  ami               = "ami-04a81a99f5ec58529"
+  count             = 1
+  ami               = "ami-0866a3c8686eaeeba"
   instance_type     = "t2.micro"
-  key_name          = "vockey"
+  key_name          = "my-key"
   security_groups = ["${aws_security_group.allow_ssh.name}"]
 }
