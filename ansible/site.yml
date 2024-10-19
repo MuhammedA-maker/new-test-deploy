@@ -18,25 +18,12 @@
         - curl
         - software-properties-common
 
-    - name: Add Docker GPG key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker stable repository
-      apt_repository:
-        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-        state: present
-        filename: docker
-
-    - name: Update apt packages after adding Docker repository
-      apt:
-        update_cache: yes
-
-    - name: Install Docker
-      apt:
-        name: docker-ce
-        state: present
+    - name: Install Docker using convenience script
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+      args:
+        executable: /bin/bash
 
     - name: Start Docker service
       systemd:
