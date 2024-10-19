@@ -18,9 +18,14 @@
         - curl
         - software-properties-common
 
-    - name: Add Docker GPG key
-      apt_key:
+    - name: Add Docker GPG key manually
+      get_url:
         url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /tmp/docker.gpg
+
+    - name: Add Docker GPG key to apt
+      apt_key:
+        file: /tmp/docker.gpg
         state: present
 
     - name: Add Docker repository
@@ -33,16 +38,10 @@
       apt:
         update_cache: yes
 
-    - name: Check if Docker is installed
-      command: docker --version
-      register: docker_installed
-      ignore_errors: true
-
     - name: Install Docker
       apt:
         name: docker-ce
         state: present
-      when: docker_installed.rc != 0
 
     - name: Start Docker service
       systemd:
