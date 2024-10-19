@@ -5,9 +5,5 @@ variable "region" {
 
 variable "ami" {
   type    = string
-  default = "ami-04a81a99f5ec58529"
+  default = "ami-0866a3c8686eaeeba"
 }
-
-# variable "public_key" {
-#   description = "ssh public key"
-# }
