@@ -1,4 +1,3 @@
-#first test
 pipeline {
       agent { label 'slave' }
 
