@@ -1,5 +1,5 @@
 pipeline {
-      agent { label 'new' }
+      agent { label 'slave' }
 
     stages {
         stage('Clone Repository') {
@@ -79,7 +79,7 @@ pipeline {
         }
         stage('Run Ansible Playbook') {
             steps {
-                sshagent(['61f0e09a-79b1-44d4-80d2-1640ad877b4d']) {
+                sshagent(['slave-test']) {
                     dir('ansible') {
                         script {
                             // Print the instance IP for debugging
@@ -99,13 +99,13 @@ pipeline {
 
     post {
         success {
-            slackSend(channel: '#note-app', message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
+            slackSend(channel: '#test-aws', message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
         }
         failure {
-            slackSend(channel: '#note-app', message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
+            slackSend(channel: '#test-aws', message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
         }
         unstable {
-            slackSend(channel: '#note-app', message: "Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
+            slackSend(channel: '#test-aws', message: "Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
         }
     }
 }
